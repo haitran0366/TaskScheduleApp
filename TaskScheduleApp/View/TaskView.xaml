@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:vm="clr-namespace:TaskScheduleApp.ViewModel"
+             x:Class="TaskScheduleApp.View.TaskView">
+    <ContentPage.BindingContext>
+        <vm:TaskViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <StackLayout Margin="20,35,20,20">
+            <Entry x:Name="taskName" Text="{Binding TaskName}" Placeholder="Task name" />
+            <Entry x:Name="description" Text="{Binding Description}" Placeholder="Description" />
+            <Label  Text="Due Date"></Label>
+            <DatePicker x:Name="DueDate" Date="{Binding DueDate, Mode=TwoWay}" ></DatePicker>
+
+            <Button Text="Add Task to Database" Command="{Binding cmdAddTask}"/>
+
+            <CollectionView x:Name="collectionView" ItemsSource="{Binding TaskList}"
+                            EmptyView="No items to display">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout>
+                            <Label Text="{Binding TaskName}"
+                               FontSize="Medium" />
+                            <Label Text="{Binding Description}"
+                               TextColor="Silver"
+                               FontSize="Small" />
+                            <Label Text="{Binding DueDate}"
+                               TextColor="Silver"
+                               FontSize="Small" />
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
